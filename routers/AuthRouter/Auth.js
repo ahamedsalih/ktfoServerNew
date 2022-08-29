@@ -15,7 +15,7 @@ router.get("/KT", (req, res) => {
 router.post("/signup", (req, res) => {
   const { name, phoneNumber } = req.body;
 
-  console.log("name,phone-->", name, phoneNumber);
+  // console.log("name,phone-->", name, phoneNumber);
 
   UserAuth.findOne({ phoneNumber })
     .then((result) => {

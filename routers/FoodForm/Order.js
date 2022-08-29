@@ -1,5 +1,6 @@
 const express = require("express");
 const moment = require("moment");
+const moment2 = require("moment-timezone");
 
 const router = express.Router();
 
@@ -8,8 +9,8 @@ const OrderFood = require("../../models/FoodForm/Order");
 router.post("/submitOrder", async (req, res) => {
   const { orderItems, userId, type } = req.body;
 
-  console.log("orderItems--->,", orderItems);
-  console.log("userId---->", userId);
+  // console.log("orderItems--->,", orderItems);
+  // console.log("userId---->", userId);
 
   const foodItems = await JSON.parse(orderItems);
 
@@ -36,7 +37,7 @@ router.post("/submitOrder", async (req, res) => {
 router.post("/getOrder", async (req, res) => {
   const { id } = req.body;
 
-  console.log("id--->", req.body);
+  // console.log("id--->", req.body);
 
   OrderFood.find({ userId: id })
     .then((result) => {
@@ -50,7 +51,9 @@ router.post("/getOrder", async (req, res) => {
 });
 
 router.get("/getTodayOrder", async (req, res) => {
-  const date = moment().format("L");
+  // const utc = moment().format("L");
+
+  const date = moment2.tz("Asia/Kolkata").format("L");
 
   console.log("date--->", date);
 
